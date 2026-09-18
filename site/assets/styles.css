@@ -135,8 +135,8 @@ a:hover {
 
 .primary-nav {
   display: flex;
-  gap: 0.35rem;
-  overflow-x: auto;
+  flex-wrap: wrap;
+  gap: 0.15rem 0.2rem;
 }
 
 .primary-nav a {
@@ -487,8 +487,26 @@ mark {
 }
 
 @media (max-width: 720px) {
+  .masthead-inner,
+  .hero-inner,
+  .toolbar-inner,
+  .catalog-inner,
+  .footer-inner,
+  .dept-cards-inner {
+    width: min(calc(100% - 1.25rem), var(--max));
+  }
+
   .primary-nav a {
-    padding-inline: 0.7rem;
+    padding: 0.55rem 0.55rem 0.75rem;
+    font-size: 0.95rem;
+  }
+
+  .hero {
+    padding-top: 1.6rem;
+  }
+
+  .hero h1 {
+    max-width: none;
   }
 
   .search-hint {
