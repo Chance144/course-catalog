@@ -54,6 +54,7 @@ def main() -> None:
 
     trade = next(course for course in courses if course["id"] == "ibus-470")
     assert trade["crosslisted"] == "ECONS 327, I BUS 470"
+    assert "crosslisted" in trade["searchText"]
     capstone = next(course for course in courses if course["id"] == "mktg-495")
     assert capstone["recommended"] == "MKTG 368 and 407"
     assert "Integrative marketing capstone course" in capstone["description"]

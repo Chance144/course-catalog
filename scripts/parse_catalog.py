@@ -185,18 +185,8 @@ def parse_courses(paragraphs: list[str]) -> dict:
             current_dept,
             current_dept.replace("_", " "),
             current_dept.replace("_", ""),
-            number,
-            title,
-            credits,
+            paragraph,
             "[M]" if writing else "",
-            effective or "",
-            fields["repeatable"] or "",
-            fields["prerequisite"] or "",
-            fields["description"] or "",
-            fields["recommended"] or "",
-            fields["typicallyOffered"] or "",
-            fields["grading"] or "",
-            fields["crosslisted"] or "",
         ]
 
         course = {
