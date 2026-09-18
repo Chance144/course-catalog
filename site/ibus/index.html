@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>International Business (I_BUS) · WSU Course Catalog</title>
+  <meta name="description" content="International Business (I_BUS) courses at Washington State University Carson College of Business for Spring, Summer, and Fall 2026.">
+  <meta name="theme-color" content="#981e32">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Source+Sans+3:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/styles.css">
+</head>
+<body data-page="ibus" data-dept="I_BUS">
+  <a class="skip-link" href="#catalog">Skip to courses</a>
+  <header class="masthead">
+    <div class="masthead-inner">
+      <p class="eyebrow">Andrew Perkins · Washington State University</p>
+      <div class="brand-row">
+        <a class="wordmark" href="/">Course Catalog</a>
+        <p class="brand-sub">Carson College of Business</p>
+      </div>
+      <nav class="primary-nav" aria-label="Departments">
+        <a href="/" >All courses</a>
+        <a href="/ibus/" aria-current="page">International Business</a>
+        <a href="/mktg/" >Marketing</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-inner">
+        <p class="terms">Spring 2026 · Summer 2026 · Fall 2026</p>
+        <h1>International Business</h1>
+        <p class="lede">I_BUS undergraduate and graduate courses from the Carson College catalog, including global leadership, trade, management, marketing, and MBA seminars.</p>
+        <p class="hero-code">Subject prefix I_BUS</p>
+      </div>
+    </section>
+
+    
+
+    <section class="toolbar" aria-label="Search and filters">
+      <div class="toolbar-inner">
+        <label class="search-field">
+          <span class="search-label">Search courses</span>
+          <input id="search" type="search" name="q" placeholder="Search by number, title, description, or prerequisite" autocomplete="off" spellcheck="false">
+          <span class="search-hint">Press <kbd>/</kbd> to search</span>
+        </label>
+        <div class="filters">
+          <fieldset class="filter-group" data-filter="dept" hidden>
+            <legend>Department</legend>
+            <label><input type="radio" name="dept" value="all" checked> All</label>
+            <label><input type="radio" name="dept" value="I_BUS"> I_BUS</label>
+            <label><input type="radio" name="dept" value="MKTG"> MKTG</label>
+          </fieldset>
+          <fieldset class="filter-group" data-filter="level">
+            <legend>Level</legend>
+            <label><input type="radio" name="level" value="all" checked> All</label>
+            <label><input type="radio" name="level" value="undergraduate"> Undergraduate</label>
+            <label><input type="radio" name="level" value="graduate"> Graduate</label>
+          </fieldset>
+          <fieldset class="filter-group" data-filter="writing">
+            <legend>Writing</legend>
+            <label><input type="radio" name="writing" value="all" checked> All</label>
+            <label><input type="radio" name="writing" value="m"> [M] Writing in the Major</label>
+          </fieldset>
+        </div>
+      </div>
+    </section>
+
+    <section id="catalog" class="catalog" aria-live="polite">
+      <div class="catalog-inner">
+        <div class="catalog-head">
+          <h2 class="catalog-title">I_BUS courses</h2>
+          <p id="result-count" class="result-count">Loading courses…</p>
+        </div>
+        <p class="policy">No letter-graded course offered by the Carson College of Business may be taken for a Pass, Fail (P, F) grade.</p>
+        <div id="course-list" class="course-list"></div>
+        <p id="empty-state" class="empty-state" hidden>No courses match those filters. Try a different search or clear a filter.</p>
+        <noscript><p class="empty-state">This catalog search needs JavaScript. Enable it to browse I_BUS and MKTG courses.</p></noscript>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p>Unofficial catalog mirror maintained for advising by Andrew Perkins. Course listings, prerequisites, writing [M] designations, credits, and descriptions are copied from the WSU catalog export for <strong>Spring, Summer, and Fall 2026</strong>. Verify every requirement against the official Washington State University catalog before registering.</p>
+      <p class="footer-meta">Carson College of Business · International Business (I_BUS) and Marketing (MKTG) · Not an official WSU publication.</p>
+    </div>
+  </footer>
+  <script src="/assets/app.js" defer></script>
+</body>
+</html>

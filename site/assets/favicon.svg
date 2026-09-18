@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Course Catalog">
+  <rect width="64" height="64" rx="10" fill="#6d1524"/>
+  <rect x="8" y="10" width="48" height="44" rx="3" fill="#f4efe8"/>
+  <path d="M32 14v36" stroke="#981e32" stroke-width="2"/>
+  <text x="20" y="40" text-anchor="middle" font-family="Georgia, serif" font-size="16" fill="#981e32">IB</text>
+  <text x="44" y="40" text-anchor="middle" font-family="Georgia, serif" font-size="16" fill="#981e32">MK</text>
+</svg>
