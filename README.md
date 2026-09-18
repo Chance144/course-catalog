@@ -15,6 +15,27 @@ python3 -m http.server 8787 --directory site
 
 Then open [http://127.0.0.1:8787](http://127.0.0.1:8787).
 
+## GitHub Pages
+
+A workflow in `.github/workflows/pages.yml` deploys the `site/` folder on every push to `main` (and on **Actions → Deploy GitHub Pages → Run workflow**).
+
+| Setting | Value |
+| --- | --- |
+| Source | GitHub Actions |
+| Artifact path | `site` |
+| Custom domain | `catalog.drandrewperkins.com` (`CNAME` in the repo root and in `site/`) |
+| Project URL | https://chance144.github.io/course-catalog/ |
+
+In the repo: **Settings → Pages → Build and deployment → Source: GitHub Actions**. The custom domain should be `catalog.drandrewperkins.com`.
+
+DNS for the custom domain (subdomain CNAME to GitHub Pages):
+
+```text
+catalog.drandrewperkins.com  CNAME  chance144.github.io
+```
+
+Until that record exists, GitHub will still 301 the project URL to the custom domain, which will not resolve. After DNS propagates, enable **Enforce HTTPS** on the Pages settings page.
+
 ## Cloudflare Pages
 
 This is a static site. There is **no build command**.
