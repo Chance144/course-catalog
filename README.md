@@ -23,10 +23,12 @@ A workflow in `.github/workflows/pages.yml` deploys the `site/` folder on every 
 | --- | --- |
 | Source | GitHub Actions |
 | Artifact path | `site` |
-| Custom domain | `catalog.drandrewperkins.com` (`CNAME` in the repo root and in `site/`) |
+| Custom domain | `catalog.drandrewperkins.com` (repo-root `CNAME`; add DNS before publishing a `site/CNAME`) |
 | Project URL | https://chance144.github.io/course-catalog/ |
 
-In the repo: **Settings → Pages → Build and deployment → Source: GitHub Actions**. The custom domain should be `catalog.drandrewperkins.com`.
+HTML/CSS/JS links are **relative**, so the same files work at `/course-catalog/` on GitHub Pages and at `/` on the custom domain.
+
+In the repo: **Settings → Pages → Build and deployment → Source: GitHub Actions**. After DNS exists, set the custom domain to `catalog.drandrewperkins.com`.
 
 DNS for the custom domain (subdomain CNAME to GitHub Pages):
 
@@ -34,7 +36,7 @@ DNS for the custom domain (subdomain CNAME to GitHub Pages):
 catalog.drandrewperkins.com  CNAME  chance144.github.io
 ```
 
-Until that record exists, GitHub will still 301 the project URL to the custom domain, which will not resolve. After DNS propagates, enable **Enforce HTTPS** on the Pages settings page.
+Do not put a `CNAME` file in `site/` until that record exists; GitHub Pages would 301 the project URL to a hostname that does not resolve. After DNS propagates, enable **Enforce HTTPS**.
 
 ## Cloudflare Pages
 

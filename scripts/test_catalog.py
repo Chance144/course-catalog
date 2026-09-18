@@ -68,7 +68,20 @@ def main() -> None:
         html = page.read_text(encoding="utf-8")
         assert "Unofficial catalog mirror" in html
         assert "Spring, Summer, and Fall 2026" in html
-        assert "/assets/app.js" in html
+        assert "assets/app.js" in html
+        assert 'href="/assets/' not in html
+        assert 'src="/assets/' not in html
+        assert 'href="/ibus/"' not in html
+        assert 'href="/mktg/"' not in html
+
+    home = (ROOT / "site" / "index.html").read_text(encoding="utf-8")
+    ibus = (ROOT / "site" / "ibus" / "index.html").read_text(encoding="utf-8")
+    assert 'href="assets/styles.css"' in home
+    assert 'src="assets/app.js"' in home
+    assert 'href="ibus/"' in home
+    assert 'href="../assets/styles.css"' in ibus
+    assert 'src="../assets/app.js"' in ibus
+    assert 'href="../"' in ibus
 
     print("Catalog checks passed: 14 I_BUS + 31 MKTG listings.")
 

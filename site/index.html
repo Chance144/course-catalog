@@ -5,83 +5,62 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>WSU Carson College Course Catalog · I_BUS & MKTG</title>
   <meta name="description" content="Searchable unofficial mirror of Washington State University Carson College International Business and Marketing courses for Spring, Summer, and Fall 2026.">
-  <meta name="theme-color" content="#981e32">
-  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <meta name="theme-color" content="#f6f6f4">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Source+Sans+3:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body data-page="home">
   <a class="skip-link" href="#catalog">Skip to courses</a>
-  <header class="masthead">
-    <div class="masthead-inner">
-      <p class="eyebrow">Andrew Perkins · Washington State University</p>
-      <div class="brand-row">
-        <a class="wordmark" href="/">Course Catalog</a>
-        <p class="brand-sub">Carson College of Business</p>
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="brand">
+        <p class="brand-kicker">Andrew Perkins · Carson College of Business</p>
+        <a class="brand-title" href="./">Course catalog</a>
+        <p class="brand-terms">Spring · Summer · Fall 2026</p>
       </div>
       <nav class="primary-nav" aria-label="Departments">
-        <a href="/" aria-current="page">All courses</a>
-        <a href="/ibus/" >International Business</a>
-        <a href="/mktg/" >Marketing</a>
+        <a href="./" aria-current="page">All courses</a>
+        <a href="ibus/" >I_BUS</a>
+        <a href="mktg/" >MKTG</a>
       </nav>
     </div>
   </header>
 
   <main>
-    <section class="hero">
-      <div class="hero-inner">
-        <p class="terms">Spring 2026 · Summer 2026 · Fall 2026</p>
-        <h1>International Business & Marketing</h1>
-        <p class="lede">A fast, searchable copy of the Carson College I_BUS and MKTG listings for advising. Undergraduate and graduate courses for Spring, Summer, and Fall 2026.</p>
+    <section class="intro">
+      <div class="intro-inner">
+        <h1>I_BUS and MKTG</h1>
+        <p class="lede">Unofficial advising copy of the Carson College catalog for Spring, Summer, and Fall 2026.</p>
         
       </div>
     </section>
 
-    
-    <section class="dept-cards" aria-label="Departments">
-      <div class="dept-cards-inner">
-        <a class="dept-card" href="/ibus/">
-          <p class="dept-code">I_BUS</p>
-          <h2>International Business</h2>
-          <p>Undergraduate and graduate I_BUS courses, including writing [M] options, internships, and MBA seminars.</p>
-          <p class="dept-stat" data-dept-count="I_BUS">14 courses</p>
-        </a>
-        <a class="dept-card" href="/mktg/">
-          <p class="dept-code">MKTG</p>
-          <h2>Marketing</h2>
-          <p>Undergraduate and graduate MKTG courses, including sales, research, the [M] capstone, and doctoral seminars.</p>
-          <p class="dept-stat" data-dept-count="MKTG">31 courses</p>
-        </a>
-      </div>
-    </section>
-
-
     <section class="toolbar" aria-label="Search and filters">
       <div class="toolbar-inner">
         <label class="search-field">
-          <span class="search-label">Search courses</span>
-          <input id="search" type="search" name="q" placeholder="Search by number, title, description, or prerequisite" autocomplete="off" spellcheck="false">
-          <span class="search-hint">Press <kbd>/</kbd> to search</span>
+          <span class="visually-hidden">Search courses</span>
+          <input id="search" type="search" name="q" placeholder="Search number, title, description, or prerequisite" autocomplete="off" spellcheck="false">
         </label>
         <div class="filters">
           <fieldset class="filter-group" data-filter="dept" >
             <legend>Department</legend>
-            <label><input type="radio" name="dept" value="all" checked> All</label>
-            <label><input type="radio" name="dept" value="I_BUS"> I_BUS</label>
-            <label><input type="radio" name="dept" value="MKTG"> MKTG</label>
+            <label class="chip"><input type="radio" name="dept" value="all" checked> All</label>
+            <label class="chip"><input type="radio" name="dept" value="I_BUS"> I_BUS</label>
+            <label class="chip"><input type="radio" name="dept" value="MKTG"> MKTG</label>
           </fieldset>
           <fieldset class="filter-group" data-filter="level">
             <legend>Level</legend>
-            <label><input type="radio" name="level" value="all" checked> All</label>
-            <label><input type="radio" name="level" value="undergraduate"> Undergraduate</label>
-            <label><input type="radio" name="level" value="graduate"> Graduate</label>
+            <label class="chip"><input type="radio" name="level" value="all" checked> All</label>
+            <label class="chip"><input type="radio" name="level" value="undergraduate"> Undergrad</label>
+            <label class="chip"><input type="radio" name="level" value="graduate"> Graduate</label>
           </fieldset>
           <fieldset class="filter-group" data-filter="writing">
             <legend>Writing</legend>
-            <label><input type="radio" name="writing" value="all" checked> All</label>
-            <label><input type="radio" name="writing" value="m"> [M] Writing in the Major</label>
+            <label class="chip"><input type="radio" name="writing" value="all" checked> All</label>
+            <label class="chip"><input type="radio" name="writing" value="m"> [M] only</label>
           </fieldset>
         </div>
       </div>
@@ -95,7 +74,10 @@
         </div>
         <p class="policy">No letter-graded course offered by the Carson College of Business may be taken for a Pass, Fail (P, F) grade.</p>
         <div id="course-list" class="course-list"></div>
-        <p id="empty-state" class="empty-state" hidden>No courses match those filters. Try a different search or clear a filter.</p>
+        <div id="empty-state" class="empty-state" hidden>
+          <p id="empty-copy">No courses match those filters.</p>
+          <button type="button" id="clear-filters">Clear search and filters</button>
+        </div>
         <noscript><p class="empty-state">This catalog search needs JavaScript. Enable it to browse I_BUS and MKTG courses.</p></noscript>
       </div>
     </section>
@@ -107,6 +89,6 @@
       <p class="footer-meta">Carson College of Business · International Business (I_BUS) and Marketing (MKTG) · Not an official WSU publication.</p>
     </div>
   </footer>
-  <script src="/assets/app.js" defer></script>
+  <script src="assets/app.js" defer></script>
 </body>
 </html>

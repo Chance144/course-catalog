@@ -1,3 +1,7 @@
+const scriptEl = document.querySelector('script[src*="app.js"]');
+const assetsDir = new URL(".", new URL(scriptEl.getAttribute("src"), location.href));
+const siteRoot = new URL("../", assetsDir);
+
 const state = {
   catalog: null,
   pageDept: document.body.dataset.dept || "all",
@@ -8,9 +12,8 @@ const els = {
   count: document.querySelector("#result-count"),
   list: document.querySelector("#course-list"),
   empty: document.querySelector("#empty-state"),
-  deptRadios: document.querySelectorAll('input[name="dept"]'),
-  levelRadios: document.querySelectorAll('input[name="level"]'),
-  writingRadios: document.querySelectorAll('input[name="writing"]'),
+  emptyCopy: document.querySelector("#empty-copy"),
+  clear: document.querySelector("#clear-filters"),
 };
 
 function selected(name) {
@@ -55,30 +58,32 @@ function matchesCourse(course, query) {
 }
 
 function creditLabel(credits) {
-  return /^v\s/i.test(credits) ? `${credits} credits` : `${credits} credit${credits === "1" ? "" : "s"}`;
+  return /^v\s/i.test(credits) ? `${credits} cr` : `${credits} cr`;
 }
 
 function coursePath(course) {
-  return `${course.dept === "I_BUS" ? "/ibus/" : "/mktg/"}#${course.id}`;
+  const folder = course.dept === "I_BUS" ? "ibus/" : "mktg/";
+  const url = new URL(folder, siteRoot);
+  return `${url.pathname}#${course.id}`;
 }
 
 function renderCourse(course, query) {
   const badges = [
-    course.writingM ? '<span class="badge badge-m">[M] Writing</span>' : "",
-    `<span class="badge ${course.level === "graduate" ? "badge-grad" : ""}">${course.level}</span>`,
+    course.writingM ? '<span class="badge badge-m">[M]</span>' : "",
+    `<span class="badge">${course.level === "graduate" ? "Grad" : "Undergrad"}</span>`,
     `<span class="badge">${escapeHtml(creditLabel(course.credits))}</span>`,
-    course.effectiveThrough ? `<span class="badge">Effective through ${escapeHtml(course.effectiveThrough)}</span>` : "",
+    course.effectiveThrough ? `<span class="badge">thru ${escapeHtml(course.effectiveThrough)}</span>` : "",
   ].join("");
 
   const blocks = [];
   if (course.prerequisite) {
-    blocks.push(`<p class="prereq"><span class="meta-label">Course Prerequisite</span>${highlight(course.prerequisite, query)}</p>`);
+    blocks.push(`<p class="prereq"><span class="meta-label">Prereq</span>${highlight(course.prerequisite, query)}</p>`);
   }
   if (course.description) {
     blocks.push(`<p class="desc">${highlight(course.description, query)}</p>`);
   }
   if (course.recommended) {
-    blocks.push(`<p class="recommended"><span class="meta-label">Recommended preparation</span>${highlight(course.recommended, query)}</p>`);
+    blocks.push(`<p class="recommended"><span class="meta-label">Recommended</span>${highlight(course.recommended, query)}</p>`);
   }
   if (course.repeatable) {
     blocks.push(`<p class="repeatable">${highlight(course.repeatable, query)}</p>`);
@@ -97,10 +102,10 @@ function renderCourse(course, query) {
     <article class="course" id="${escapeHtml(course.id)}" data-dept="${escapeHtml(course.dept)}">
       <div class="course-top">
         <a class="course-code" href="${coursePath(course)}">${escapeHtml(course.dept)} ${escapeHtml(course.numberDisplay)}</a>
+        <h2>${highlight(course.title, query)}</h2>
         <div class="badges">${badges}</div>
       </div>
-      <h2>${highlight(course.title, query)}</h2>
-      ${blocks.join("")}
+      <div class="course-body">${blocks.join("")}</div>
     </article>
   `;
 }
@@ -139,10 +144,15 @@ function applyFilters() {
 
   els.list.innerHTML = visible.map((course) => renderCourse(course, filters.q)).join("");
   els.empty.hidden = visible.length !== 0;
+  if (!visible.length) {
+    const label = filters.q ? `No courses match “${filters.q}”.` : "No courses match those filters.";
+    els.emptyCopy.textContent = `${label} Try another term or clear the filters.`;
+  }
   const scope = filters.dept === "all" ? "courses" : `${filters.dept} courses`;
-  els.count.textContent = `Showing ${visible.length} of ${
-    filters.dept === "all" ? state.catalog.courses.length : state.catalog.courses.filter((course) => course.dept === filters.dept).length
-  } ${scope}`;
+  const total = filters.dept === "all"
+    ? state.catalog.courses.length
+    : state.catalog.courses.filter((course) => course.dept === filters.dept).length;
+  els.count.textContent = `${visible.length} of ${total} ${scope}`;
 
   if (location.hash) {
     const target = document.getElementById(location.hash.slice(1));
@@ -161,11 +171,21 @@ function hydrateFromUrl() {
   setRadio("writing", params.get("writing") || "all");
 }
 
+function clearFilters() {
+  els.search.value = "";
+  setRadio("dept", "all");
+  setRadio("level", "all");
+  setRadio("writing", "all");
+  applyFilters();
+  els.search.focus();
+}
+
 function bindEvents() {
   els.search.addEventListener("input", applyFilters);
   document.querySelectorAll(".filters input").forEach((input) => {
     input.addEventListener("change", applyFilters);
   });
+  if (els.clear) els.clear.addEventListener("click", clearFilters);
   window.addEventListener("popstate", () => {
     hydrateFromUrl();
     applyFilters();
@@ -183,25 +203,15 @@ function bindEvents() {
   });
 }
 
-function updateDeptCounts() {
-  const counts = { I_BUS: 0, MKTG: 0 };
-  for (const course of state.catalog.courses) counts[course.dept] += 1;
-  document.querySelectorAll("[data-dept-count]").forEach((node) => {
-    const dept = node.getAttribute("data-dept-count");
-    node.textContent = `${counts[dept]} courses`;
-  });
-}
-
 async function init() {
   bindEvents();
   hydrateFromUrl();
-  const response = await fetch("/assets/courses.json");
+  const response = await fetch(new URL("courses.json", assetsDir));
   if (!response.ok) {
     els.count.textContent = "Could not load the catalog.";
     return;
   }
   state.catalog = await response.json();
-  updateDeptCounts();
   applyFilters();
 }
 
